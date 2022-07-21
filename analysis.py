@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-from utils import get_amount_out_history
+from utils import get_amount_members, get_amount_out_history
 from Transaction import Transaction
 
 import csv
@@ -20,17 +20,16 @@ with open('./data/metaCartel.csv') as csv_file:
             transactions.append(transaction)
     print(f'Processed {line_count} lines.')
 
-print(get_amount_out_history(transactions))
 
 # Data for plotting
-t = np.arange(0.0, 2.0, 0.01)
-s = 1 + np.sin(2 * np.pi * t)
+t = get_amount_members(transactions)
+s = get_amount_out_history(transactions)
 
 fig, ax = plt.subplots()
 ax.plot(t, s)
 
-ax.set(xlabel='time (s)', ylabel='voltage (mV)',
-       title='About as simple as it gets, folks')
+ax.set(xlabel='Members (s)', ylabel='Tokens (mV)',
+       title='Members and Token History')
 ax.grid()
 
 fig.savefig("test.png")
