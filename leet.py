@@ -21,5 +21,7 @@ def twoSum(nums):
         rightSum -= val
         leftSum += val
 
+    return rightSum
+
 
 print(twoSum([2, 1, -1]))
