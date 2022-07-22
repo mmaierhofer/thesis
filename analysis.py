@@ -1,38 +1,37 @@
 from audioop import reverse
 from matplotlib import pyplot as plt
-from utils import get_amount_members, get_amount_out_history
-from Transaction import Transaction
+from utils import get_all_members, get_amount_members, get_amount_in, get_amount_out, get_daos, get_rage_quits
 
-import csv
 import numpy as np
 
-transactions = []
+files = [
+    "theLao",
+    "metaCartel",
+    "MetaGammaDeltaDao"
+]
 
-with open('./data/theLao.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    for row in csv_reader:
-        if line_count == 0:
-            print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            transaction = Transaction(
-                row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
-            transactions.append(transaction)
-            transactions.reverse()
-    print(f'Processed {line_count} lines.')
+daos = get_daos(files)
 
+members = get_all_members(daos)
 
-# Data for plotting
-t = get_amount_members(transactions)
-s = get_amount_out_history(transactions)
+membersSet = set(members)
 
-fig, ax = plt.subplots()
-ax.plot(t, s)
+print(len(members))
+print(len(membersSet))
 
-ax.set(xlabel='Members', ylabel='Tokens spent',
-       title='Participation Activities and Token History')
-ax.grid()
+# plot data
+for dao in daos:
+    activities = get_amount_members(dao.transactions)
+    incoming = get_amount_in(dao.transactions)
+    outgoing = get_amount_out(dao.transactions)
+    rage_quits = get_rage_quits(dao.transactions)
 
-fig.savefig("test.png")
-plt.show()
+    fig, ax = plt.subplots()
+    ax.plot(activities, rage_quits)
+
+    ax.set(xlabel='Incoming Activities', ylabel='Rage Quits',
+           title=f'{dao.name}')
+    ax.grid()
+
+    fig.savefig("test.png")
+    plt.show()
