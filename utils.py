@@ -3,6 +3,7 @@ from numpy import append
 from tokens import tokens
 from Transaction import Transaction
 from Dao import Dao
+from datetime import datetime
 
 import csv
 
@@ -19,9 +20,11 @@ def get_amount_out(transactions):
 
     token_history = []
 
+    times = []
+
     for transaction in transactions:
         if(transaction.type is not "Rage Quit"):
-            if len(token_history) > 0:
+            """if len(token_history) > 0:
                 newValue = int(transaction.amount_out) + \
                     int(token_history[len(token_history) - 1])
             elif len(token_history) == 0:
@@ -29,19 +32,28 @@ def get_amount_out(transactions):
             elif len(token_history) > 0:
                 newValue = int(token_history[len(token_history) - 1])
             else:
-                newValue = 0
+                newValue = 0"""
 
-            token_history.append(newValue)
+            timestamp = int(transaction.date)
+            times.append(timestamp)
+            token_history.append(int(transaction.amount_out) / 100000)
 
-    return token_history
+    for idx, time in enumerate(times):
+        times[idx] = datetime.fromtimestamp(time)
+
+    token_history.reverse()
+
+    return [token_history, times]
 
 
 def get_amount_in(transactions):
 
     token_history = []
 
+    times = []
+
     for transaction in transactions:
-        if(transaction.type is not "Rage Quit"):
+        """if(transaction.type is not "Rage Quit"):
             if len(token_history) > 0:
                 newValue = int(transaction.amount_in) + \
                     int(token_history[len(token_history) - 1])
@@ -50,11 +62,18 @@ def get_amount_in(transactions):
             elif len(token_history) > 0:
                 newValue = int(token_history[len(token_history) - 1])
             else:
-                newValue = 0
+                newValue = 0"""
 
-            token_history.append(newValue)
+        token_history.append(transaction.amount_in)
+        timestamp = int(transaction.date)
+        times.append(timestamp)
 
-    return token_history
+    for idx, time in enumerate(times):
+        times[idx] = datetime.fromtimestamp(time)
+
+    token_history.reverse()
+
+    return [token_history, times]
 
 
 def get_amount_members(transactions):
@@ -100,7 +119,7 @@ def get_daos(files):
                     transaction = Transaction(
                         row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
                     transactions.append(transaction)
-                    transactions.reverse()
+                    # transactions.reverse()
             print(f'Processed {line_count} lines for {file}.')
 
         dao = Dao(file, transactions)
@@ -127,17 +146,40 @@ def get_rage_quits(transactions):
 
     timestamps = []
 
+    times = []
+
     for transaction in transactions:
         if len(rage_quits) > 0:
             if(transaction.type == "Rage Quit" and transaction.date not in timestamps):
                 timestamps.append(transaction.date)
                 rage_quits.append(rage_quits[len(rage_quits)-1] + 1)
+                timestamp = int(transaction.date)
+                times.append(timestamp)
             else:
-                rage_quits.append(rage_quits[len(rage_quits)-1] + 0)
+                """rage_quits.append(rage_quits[len(rage_quits)-1] + 0)"""
         else:
             if(transaction.type == "Rage Quit"):
                 timestamps.append(transaction.date)
                 rage_quits.append(1)
+                timestamp = int(transaction.date)
+                times.append(timestamp)
             else:
-                rage_quits.append(0)
+                """rage_quits.append(0)"""
+
+    for idx, time in enumerate(times):
+        times[idx] = datetime.fromtimestamp(time)
+
+    rage_quits.reverse()
+
+    return [rage_quits, times]
+
+
+def get_rage_quits_by_date(transactions):
+    rage_quits = []
+
+    for transaction in transactions:
+        if transaction.type == "Rage Quit" and transaction.date not in rage_quits:
+            timestamp = int(transaction.date)
+            rage_quits.append(datetime.fromtimestamp(timestamp))
+
     return rage_quits
