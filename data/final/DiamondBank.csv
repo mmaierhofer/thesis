@@ -1,0 +1,57 @@
+Date,Type,Shares,Loot,Applicant,Title,Token,In,Out
+1656270684,Process Proposal,0,0,0x85ecca75f99aebc79e2a69540d95d9990c2aad2a,July / August Operations,USDC,0,80000
+1655151069,Rage Quit,,,,,DAI,0,77.069665
+1655151069,Rage Quit,,,,,USDC,0,16004.178957
+1655151069,Rage Quit,,,,,WETH,0,0.404424
+1655151038,Rage Quit,,,,,DAI,0,38.534832
+1655151038,Rage Quit,,,,,USDC,0,8002.089478
+1655151038,Rage Quit,,,,,WETH,0,0.202212
+1655150986,Rage Quit,,,,,DAI,0,38.534832
+1655150986,Rage Quit,,,,,USDC,0,8002.089478
+1655150986,Rage Quit,,,,,WETH,0,0.202212
+1655096069,Process Proposal,0,0,0x6989beb3fc8842704f05139ba2ed2b1182b3bac9,Christian Payroll | June,USDC,0,10000.0
+1654709024,Tokens Collected,,,,,USDC,2125.0,0
+1653865366,Process Proposal,0,0,0x85ecca75f99aebc79e2a69540d95d9990c2aad2a,Rohan / Angela Payments + Ops Expenses,USDC,0,15000.0
+1652464901,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Jordan Payroll,USDC,0,20000.0
+1652463536,Process Proposal,0,0,0x6989beb3fc8842704f05139ba2ed2b1182b3bac9,May Payroll | Christian,USDC,0,10000.0
+1650980026,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,May Payroll / Jordan,USDC,0,5000.0
+1649919143,Process Proposal,0,0,0x85ecca75f99aebc79e2a69540d95d9990c2aad2a,Funding Ops Multisig | 10k USDC,USDC,0,10000.0
+1648937193,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Jordan | Payroll Snafu,DAI,0,6573.0
+1648600101,Rage Quit,,,,,DAI,0,3.886180
+1648600101,Rage Quit,,,,,USDC,0,281.720689
+1648600101,Rage Quit,,,,,WETH,0,0.006424
+1648578404,Process Proposal,0,0,0x6989beb3fc8842704f05139ba2ed2b1182b3bac9,April Payroll - Christian,USDC,0,10000.0
+1648497744,Process Proposal,0,0,0x154faf08a58e5f2c36b3ac1b2055681300ad2967,April Payroll - Jordan,USDC,0,10000.0
+1646851840,Process Proposal,0,0,0x6989beb3fc8842704f05139ba2ed2b1182b3bac9,March Payroll | Christian,USDC,0,10000.0
+1646163647,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,March Payroll | Jordan,USDC,0,10000.0
+1644862071,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Season 0 Funding,USDC,0,70000.0
+1644861951,Process Proposal,16,0,0xe0b376e6282c327cbb7c2b2841d0b7b0595cad60,Vibe Capital + 10000 USDC,USDC,9600.0,0
+1644789907,Process Proposal,0,0,0x3a8af31d3cfe775172853528167bb2b5760bf7b9,"Jovian | February salary, reimburse gas fees & Eth Denver",USDC,0,12128.0
+1643903218,Process Proposal,0,0,0x6989beb3fc8842704f05139ba2ed2b1182b3bac9,Christian | Feb Payroll + Gas Reimbursement,USDC,0,12839.69
+1643609647,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,"Amphiboly | February Payroll ",USDC,0,10000.0
+1642631815,Process Proposal,0,0,0x3a8af31d3cfe775172853528167bb2b5760bf7b9,Jovian | Salary | January 2022,USDC,0,10000.0
+1641734794,Process Proposal,0,0,0x6989beb3fc8842704f05139ba2ed2b1182b3bac9,Christian | Funding Proposal | January 2022,USDC,0,10000.0
+1640720040,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Amphiboly | Funding Proposal | January,USDC,0,10000.0
+1640299956,Tokens Collected,,,,,USDC,150000.0,0
+1640142646,Process Proposal,13,0,0xdc97fe803a02ccad448aedb0a8d4b61aa137e489,Second Payment - Chainverse Community Manager UI (Chainverse MVP),USDC,0,10300.0
+1637450577,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Nov/Dev Community Bounties + Ops Expenses + Chainverse Dev,USDC,0,48000.0
+1637079876,Process Proposal,125,75000,0x7ac712ec4c58ded138cc4e63e0fd59f697cc6963,MCV DAO 75000,WETH,15.870261,0
+1637001808,Process Proposal,0,0,0x97b9958facec9acb7adb2bb72a70172cb5a0ea7c,Christian Payroll | 1/2 Nov + Dec 2021,USDC,0,15000.0
+1637001692,Process Proposal,200,0,0x3a8af31d3cfe775172853528167bb2b5760bf7b9,Jovian's Shares for Research Leadership & Nov/Dec 2021 Salary,USDC,0,20000.0
+1636919084,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Amphiboly Payroll | Nov+Dec,USDC,0,20000.0
+1636640127,Process Proposal,12,0,0xdc97fe803a02ccad448aedb0a8d4b61aa137e489,Funding Proposal - Chainverse Community Manager UI (Chainverse MVP),USDC,0,10000.0
+1636639745,Process Proposal,16,0,0xe6dc752f04414251d7b3474a7f9ff99e23647efb,PulpMachina  + 9600,DAI,9600.0,0
+1635720193,Process Proposal,0,0,0xc0ef4f07a9b5f15f1cdbc0fdad88c912a45caf3d,Legal retainer for Yev Muchnik @ Launch Legal,USDC,0,5000.0
+1635484446,Process Proposal,16,9600,0x9f8d1c9c54a7dcbf242012f158b1594f17ef4211,arentweall  9600,USDC,9600.0,0
+1635380997,Process Proposal,0,0,0x97b5bcfea315d68f8007ca93bf6020a78dd26d49,own fund - reimbursement,USDC,0,30000.0
+1635218007,Process Proposal,0,0,0xc75446a6adaef73269dbdece73536977b2b639e0,Amphiboly Payment | FTE | 10/18 - 10/29,USDC,0,5000.0
+1635217633,Process Proposal,16,0,0x5832fc11416a4733ec424878736a2443f25e91e9,Ben - 9600,USDC,9600.0,0
+1634918762,Tokens Collected,,,,,USDC,200000.0,0
+1634688689,Process Proposal,708,424800,0x2845537f49ae6d343af383360db06ef70dae49b7,"Shima Capital - 424,800 USDC",USDC,424800.0,0
+1634672219,Process Proposal,16,0,0x66b1de0f14a0ce971f7f248415063d44caf19398,Future Endeavours (Yalor) - USDC 9600,USDC,9600.0,0
+1634659938,Tokens Collected,,,,,USDC,160000.0,0
+1634651953,Tokens Collected,,,,,USDC,10000.0,0
+1634521532,Tokens Collected,,,,,USDC,12600.0,0
+1634515589,Process Proposal,32,19200,0x28a63e5ea686713345e336905465d112c3d9d494,"Fredo -USDC 19,200",USDC,19200.0,0
+1634502300,Process Proposal,16,9600,0x775af9b7c214fe8792ab5f5da61a8708591d517e,"Isaac - USDC 9,600",USDC,9600.0,0
+1634318008,Process Proposal,16,0,0x21799f09a5a73dd7364930cd5d726b8a87093f8c,"Maex Ament - USDC 10,000",USDC,9600,0

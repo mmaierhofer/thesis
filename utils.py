@@ -1,49 +1,72 @@
+import json
 from time import time
 from numpy import append
 from tokens import tokens
 from Transaction import Transaction
 from Dao import Dao
 from datetime import datetime
-
+import requests
 import csv
+
+api_key = "cf5d72df5d2ab38704096fba561cfcd191ea89bbcba92c4890562c8fa896fdf2"
 
 
 def in_euro(amount, usedToken):
-    amount_in_euros = 0
+    if "MCV" in usedToken:
+        return float(0)
     for token in tokens:
         if token["name"] == usedToken:
-            amount_in_euros = float(amount) * token["EUR"]
-    return amount_in_euros
+            amm = float(amount) * token["DOL"]
+            return float(amount) * token["DOL"]
 
 
 def get_amount_out(transactions):
 
     token_history = []
 
+    transactions.reverse()
+
     times = []
 
     for transaction in transactions:
-        if(transaction.type is not "Rage Quit"):
-            """if len(token_history) > 0:
-                newValue = int(transaction.amount_out) + \
-                    int(token_history[len(token_history) - 1])
+        if(transaction.type != "Rage Quit"):
+            if len(token_history) > 0:
+                newValue = float(in_euro(transaction.amount_out, transaction.token)) + \
+                    float(token_history[len(token_history) - 1])
             elif len(token_history) == 0:
-                newValue = int(transaction.amount_out)
+                newValue = float(
+                    in_euro(transaction.amount_out, transaction.token))
             elif len(token_history) > 0:
-                newValue = int(token_history[len(token_history) - 1])
+                newValue = float(token_history[len(token_history) - 1])
             else:
-                newValue = 0"""
+                newValue = 0
+
+            if float(transaction.amount_out) > 0:
+                print(in_euro(transaction.amount_out, transaction.token))
+                print(datetime.fromtimestamp(int(transaction.date)))
+                print(transaction.title)
 
             timestamp = int(transaction.date)
             times.append(timestamp)
-            token_history.append(int(transaction.amount_out) / 100000)
+            token_history.append(
+                newValue)
 
     for idx, time in enumerate(times):
         times[idx] = datetime.fromtimestamp(time)
 
-    token_history.reverse()
+    print(token_history[len(token_history)-1])
 
     return [token_history, times]
+
+
+def get_num_participation(transactions):
+
+    count = 0
+
+    for transaction in transactions:
+        if (int)(transaction.amount_out) > 0:
+            count += 1
+    return count
 
 
 def get_amount_in(transactions):
@@ -53,18 +76,20 @@ def get_amount_in(transactions):
     times = []
 
     for transaction in transactions:
-        """if(transaction.type is not "Rage Quit"):
+        if(transaction.type is "proposal"):
             if len(token_history) > 0:
-                newValue = int(transaction.amount_in) + \
-                    int(token_history[len(token_history) - 1])
+                newValue = float(in_euro(transaction.amount_in, transaction.token)) + \
+                    float(token_history[len(token_history) - 1])
             elif len(token_history) == 0:
-                newValue = int(transaction.amount_in)
+                newValue = float(
+                    in_euro(transaction.amount_in, transaction.token))
             elif len(token_history) > 0:
-                newValue = int(token_history[len(token_history) - 1])
+                newValue = float(token_history[len(token_history) - 1])
             else:
-                newValue = 0"""
+                newValue = 0
+        token_history.append(newValue)
 
-        token_history.append(transaction.amount_in)
+        # token_history.append((float(transaction.amount_in)))
         timestamp = int(transaction.date)
         times.append(timestamp)
 
@@ -74,6 +99,39 @@ def get_amount_in(transactions):
     token_history.reverse()
 
     return [token_history, times]
+
+
+def get_proposals_in(transactions):
+
+    history = []
+
+    transactions.reverse()
+
+    times = []
+
+    for transaction in transactions:
+        if(transaction.type != "Rage Quit" and transaction.type != "Tokens Collected" and float(transaction.amount_in) > 0):
+            if len(history) > 0:
+                newValue = 1 + history[len(history) - 1]
+            elif len(history) == 0:
+                newValue = 1
+            elif len(history) > 0:
+                newValue = history[len(history) - 1]
+            else:
+                newValue = 0
+            history.append(newValue)
+
+            # token_history.append((float(transaction.amount_in)))
+            timestamp = int(transaction.date)
+            times.append(timestamp)
+
+    for idx, time in enumerate(times):
+        times[idx] = datetime.fromtimestamp(time)
+
+    times.append(datetime.fromtimestamp(1659304800))
+    history.append(history[len(history) - 1])
+
+    return [history, times]
 
 
 def get_amount_members(transactions):
@@ -108,7 +166,7 @@ def get_daos(files):
     for file in files:
         transactions = []
 
-        with open(f'./data/{file}.csv') as csv_file:
+        with open(f'./data/final/{file}.csv') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
@@ -134,8 +192,7 @@ def get_all_members(daos):
 
     for dao in daos:
         for transaction in dao.transactions:
-            if(transaction.applicant is not "" and transaction.type is not "Rage Quit"):
-                print(transaction.type)
+            if(transaction.applicant != "" and transaction.type != "Rage Quit"):
                 members.append(transaction.applicant)
 
     return members
@@ -167,19 +224,15 @@ def get_rage_quits(transactions):
                 """rage_quits.append(0)"""
 
     for idx, time in enumerate(times):
-        times[idx] = datetime.fromtimestamp(time)
+        times[idx] = datetime.strptime(datetime.strftime(
+            datetime.fromtimestamp(time), "%m-%Y"), "%m-%Y")
+
+    rage_quits.insert(0, 0)
+    rage_quits.append(rage_quits[len(rage_quits)-1])
+    times.insert(0, datetime.fromtimestamp(1659304800))
+    times.append(datetime.fromtimestamp(1583017200))
 
     rage_quits.reverse()
 
+    print(rage_quits[0])
     return [rage_quits, times]
-
-
-def get_rage_quits_by_date(transactions):
-    rage_quits = []
-
-    for transaction in transactions:
-        if transaction.type == "Rage Quit" and transaction.date not in rage_quits:
-            timestamp = int(transaction.date)
-            rage_quits.append(datetime.fromtimestamp(timestamp))
-
-    return rage_quits
