@@ -5,12 +5,10 @@ from tokens import tokens
 from Transaction import Transaction
 from Dao import Dao
 from datetime import datetime
-import requests
 import csv
 
-api_key = "cf5d72df5d2ab38704096fba561cfcd191ea89bbcba92c4890562c8fa896fdf2"
-
-
+## Convert Token into value of US Dollar
+## according to the values stored in tokens.py
 def in_euro(amount, usedToken):
     if "MCV" in usedToken:
         return float(0)
@@ -20,6 +18,9 @@ def in_euro(amount, usedToken):
             return float(amount) * token["DOL"]
 
 
+## This function extracts the amounts
+## of investments undertaken by the 
+## different dao forks
 def get_amount_out(transactions):
 
     token_history = []
@@ -59,6 +60,8 @@ def get_amount_out(transactions):
     return [token_history, times]
 
 
+## This function gets the total
+## number of participation in the daos
 def get_num_participation(transactions):
 
     count = 0
@@ -68,7 +71,8 @@ def get_num_participation(transactions):
             count += 1
     return count
 
-
+## This function calculates the accumulative
+## amount of incoming tokens 
 def get_amount_in(transactions):
 
     token_history = []
@@ -76,7 +80,7 @@ def get_amount_in(transactions):
     times = []
 
     for transaction in transactions:
-        if(transaction.type is "proposal"):
+        if(transaction.type == "proposal"):
             if len(token_history) > 0:
                 newValue = float(in_euro(transaction.amount_in, transaction.token)) + \
                     float(token_history[len(token_history) - 1])
@@ -101,6 +105,10 @@ def get_amount_in(transactions):
     return [token_history, times]
 
 
+## This function calculates the 
+## accumulative participation
+## based on proposals within the
+## dao or project
 def get_proposals_in(transactions):
 
     history = []
@@ -134,6 +142,10 @@ def get_proposals_in(transactions):
     return [history, times]
 
 
+## Get number of members of the DAOs
+## -> not accurate
+## In the thesis the number of members
+## provided on DAOhaus was used.
 def get_amount_members(transactions):
 
     member_history = []
@@ -160,7 +172,9 @@ def get_amount_members(transactions):
 
     return member_history
 
-
+## Reads the transactional data from the
+## files, according to the provided filenames
+## and returns them in a multidimensional array
 def get_daos(files):
     daos = []
     for file in files:
@@ -198,6 +212,8 @@ def get_all_members(daos):
     return members
 
 
+## Function returns accumulative
+## action of ragequits
 def get_rage_quits(transactions):
     rage_quits = []
 
@@ -229,6 +245,7 @@ def get_rage_quits(transactions):
 
     rage_quits.insert(0, 0)
     rage_quits.append(rage_quits[len(rage_quits)-1])
+    ## Set all timestamps to the same beginning
     times.insert(0, datetime.fromtimestamp(1659304800))
     times.append(datetime.fromtimestamp(1583017200))
 
